@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Elevate Growth Sites™ — Websites that look unreal, load instantly, and convert</title>
+  <meta name="description" content="Done‑for‑you websites engineered for speed, clarity, and trust. Custom builds with search‑ready structure — fully managed so you never touch a thing." />
+  <meta property="og:title" content="Elevate Growth Sites™ — Websites that look unreal, load instantly, and convert" />
+  <meta property="og:description" content="Done‑for‑you websites engineered for speed, clarity, and trust." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="index.css" />
+  <script defer src="index.js"></script>
+</head>
+<body>
+  <!--
+    QUICK SETUP
+    1) Put your logo at assets/logo.png (PNG preferred).
+    2) Replace gallery files: assets/mock1.png, assets/mock2.png, assets/mock3.png (or .jpg/.webp).
+    3) Set your email in index.js → const CONTACT_EMAIL.
+  -->
+
+  <header class="site-header" id="top">
+  <div class="container header-inner">
+    <a href="#top" class="brand">
+      <!-- Logo with inline SVG fallback -->
+      <img class="brand-logo" src="assets/logo.png" alt="Elevate Growth logo"
+           onerror="this.replaceWith(document.getElementById('logo-fallback').content.cloneNode(true))">
+      <template id="logo-fallback">
+        <svg aria-label="Elevate Growth" width="36" height="36" viewBox="0 0 112 112" role="img"
+             style="border-radius:10px; box-shadow:0 20px 60px rgba(0,0,0,.45)">
+          <defs>
+            <linearGradient id="grad" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="#38BCF6"/>
+              <stop offset="100%" stop-color="#0267B5"/>
+            </linearGradient>
+          </defs>
+          <rect width="112" height="112" rx="20" fill="url(#grad)"/>
+          <path d="M32 80 L56 24 L80 80" fill="none" stroke="#0b1220" stroke-width="10"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </template>
+      <span class="brand-text" aria-hidden="true">Elevate Growth</span>
+    </a>
+
+    <!-- Mobile menu toggle -->
+    <button class="menu-toggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+
+    <!-- Primary navigation -->
+    <nav id="primaryNav" class="nav" aria-label="Primary">
+      <a href="#work" class="nav-link">Inspiration</a>
+      <a href="#offer" class="nav-link">Program</a>
+      <a href="#process" class="nav-link">Process</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#contact" class="btn btn-sm btn-primary nav-cta">Get a Quote</a>
+    </nav>
+  </div>
+</header>
+
+  <main>
+    <section class="hero">
+      <div class="bg-grid" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1 class="h1 gradient-text">Websites that look unreal, load instantly, and convert.</h1>
+          <p class="sub">
+            Done‑for‑you websites engineered for speed, clarity, and trust.
+            Custom builds with search‑ready structure — fully managed so you never touch a thing.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary btn-lg" href="#contact">Get your quote</a>
+            <a class="btn btn-outline btn-lg" href="#work">See inspiration</a>
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <div class="card preview tilt">
+            <img class="asset" src="assets/mock1.png" alt="Inspiration preview 1">
+          </div>
+          <div class="card preview small tilt">
+            <img class="asset" src="assets/mock2.png" alt="Inspiration preview 2">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="container">
+        <h2 class="h2">What you get — no fluff, just results</h2>
+        <p class="lead">Everything is practical and under our control. No vague promises. No salesy talk.
+          Just a site that does its job.</p>
+
+        <div class="grid features-grid">
+          <article class="feature">
+            <div class="icon" aria-hidden="true">🧱</div>
+            <h3>Custom Conversion Website</h3>
+            <p>Tailored design and copy built to turn visitors into inquiries. Clear calls‑to‑action,
+              clean structure, secure and stable foundation.</p>
+          </article>
+
+          <article class="feature">
+            <div class="icon" aria-hidden="true">🎨</div>
+            <h3>Branding Integration</h3>
+            <p>Your logo, colors, tone, and photos — presented professionally so you look established and trustworthy.</p>
+          </article>
+
+          <article class="feature">
+            <div class="icon" aria-hidden="true">⚡</div>
+            <h3>Performance & Search Foundations</h3>
+            <p>Fast‑loading pages, mobile‑ready layout, and search‑friendly structure (titles, meta descriptions, headers).</p>
+          </article>
+
+          <article class="feature">
+            <div class="icon" aria-hidden="true">📨</div>
+            <h3>Lead Form + Inbox Setup</h3>
+            <p>Simple inquiry form wired to your email or phone. Optional CRM hookup when needed.</p>
+          </article>
+
+          <article class="feature">
+            <div class="icon" aria-hidden="true">🛡️</div>
+            <h3>Ongoing Management</h3>
+            <p>Hosting, backups, security updates, and minor edits. We keep it online, fast, and tidy so you don’t touch it.</p>
+          </article>
+
+          <article class="feature">
+            <div class="icon" aria-hidden="true">🚀</div>
+            <h3>Priority Access</h3>
+            <p>Direct line for same‑day changes (within reason). Real people, real service.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="specs" id="specs">
+      <div class="container">
+        <div class="specs-card">
+          <h2 class="h2">Built like a super‑site</h2>
+          <p class="lead">Clean code. Lightweight stack. Obsessive speed and clarity.</p>
+          <div class="badges">
+            <div class="badge-chip" title="Fast load, optimized images">⚡ Speed‑tuned</div>
+            <div class="badge-chip" title="Semantic HTML, meta, headings">🔎 Search‑ready</div>
+            <div class="badge-chip" title="Responsive layouts, touch targets">📱 Mobile‑first</div>
+            <div class="badge-chip" title="HTTPS, updates, backups">🛡️ Secure & maintained</div>
+            <div class="badge-chip" title="Real humans, quick changes">🤝 Priority support</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="work">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2">Inspiration Work</h2>
+          <p class="lead">Three example directions to spark ideas. These are <strong>not</strong> templates — your site is custom‑built for your business.</p>
+        </div>
+
+        <div class="grid gallery-grid">
+          <figure class="shot" data-title="Roofing Pro — Clean & Credible">
+            <img class="asset" src="assets/mock1.png" alt="Inspiration: Roofing Pro">
+            <figcaption>
+              <div>
+                <h3>Roofing Pro — Clean & Credible</h3>
+                <p>Strong hero, trust badges, clear CTA, service grid.</p>
+              </div>
+              <button class="btn btn-sm btn-outline open-demo" data-src="demos/roofing.html">Open</button>
+            </figcaption>
+          </figure>
+
+          <figure class="shot" data-title="Landscaper — Visual & Bold">
+            <img class="asset" src="assets/mock2.png" alt="Inspiration: Landscaper">
+            <figcaption>
+              <div>
+                <h3>Landscaper — Visual & Bold</h3>
+                <p>Big imagery, before/after sections, short copy.</p>
+              </div>
+              <button class="btn btn-sm btn-outline open-lightbox" data-image="assets/mock2.png">Open</button>
+            </figcaption>
+          </figure>
+
+          <figure class="shot" data-title="Renovations — Premium & Trust‑Led">
+            <img class="asset" src="assets/mock3.png" alt="Inspiration: Home Renovations">
+            <figcaption>
+              <div>
+                <h3>Renovations — Premium & Trust‑Led</h3>
+                <p>Case studies, testimonials, guarantees, FAQs.</p>
+              </div>
+              <button class="btn btn-sm btn-outline open-lightbox" data-image="assets/mock3.png">Open</button>
+            </figcaption>
+          </figure>
+        </div>
+
+        <p class="note">👆 Replace these images with your screenshots at
+          <code>assets/mock1.png</code>, <code>assets/mock2.png</code>, <code>assets/mock3.png</code>.
+        </p>
+      </div>
+    </section>
+
+    <section class="offer" id="offer">
+      <div class="container offer-card">
+        <div class="offer-copy">
+          <h2 class="h2">Program Overview</h2>
+          <p class="lead">Custom websites built to rank, load fast, and convert — fully managed.</p>
+          <ul class="checklist">
+            <li>Custom conversion website (design + copy)</li>
+            <li>Branding integration (logo, colors, tone)</li>
+            <li>Performance & search foundations</li>
+            <li>Lead form & inbox setup</li>
+            <li>Hosting, backups, security updates</li>
+            <li>Minor edits included monthly</li>
+            <li>Priority support with fast turnaround</li>
+          </ul>
+          <div class="cta-row">
+            <a class="btn btn-primary btn-lg" href="#contact">Start your build</a>
+            <a class="btn btn-outline btn-lg" href="#faq">Questions?</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="process" id="process">
+      <div class="container">
+        <h2 class="h2">Simple, no‑friction build process</h2>
+        <ol class="steps">
+          <li>
+            <h3>1) Discover</h3>
+            <p>Quick kickoff to understand your services, photos, and goals.</p>
+          </li>
+          <li>
+            <h3>2) Build</h3>
+            <p>We design and write everything. You approve the preview.</p>
+          </li>
+          <li>
+            <h3>3) Launch</h3>
+            <p>We handle the technical setup and go live cleanly.</p>
+          </li>
+          <li>
+            <h3>4) Manage</h3>
+            <p>We keep it updated, secure, and make ongoing tweaks.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="container">
+        <h2 class="h2">FAQ</h2>
+        <details>
+          <summary>Is this a template?</summary>
+          <p>No. We build your site to match your brand and services. The inspiration gallery is there to spark direction — your site is custom.</p>
+        </details>
+        <details>
+          <summary>What’s included in monthly management?</summary>
+          <p>Hosting, backups, security patches, performance checks, and minor content edits. You run your business — we keep the site tight.</p>
+        </details>
+        <details>
+          <summary>What do you need from me?</summary>
+          <p>Your logo, a few photos, and a short list of services. That’s it — we handle the rest.</p>
+        </details>
+        <details>
+          <summary>How fast can we launch?</summary>
+          <p>Usually 2–3 weeks from kickoff depending on review cycles.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container contact-card">
+        <div class="contact-copy">
+          <h2 class="h2">Get your free website quote</h2>
+          <p class="lead">Tell us a bit about your business. We’ll reply with a simple tailored quote — no pressure, no fluff.</p>
+        </div>
+        <form id="contactForm" class="form" novalidate>
+          <div class="grid form-grid">
+            <label class="field">
+              <span>Full name</span>
+              <input type="text" name="name" placeholder="Jane Contractor" required>
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input type="email" name="email" placeholder="you@business.com" required>
+            </label>
+            <label class="field">
+              <span>Phone</span>
+              <input type="tel" name="phone" placeholder="(555) 555‑5555">
+            </label>
+            <label class="field">
+              <span>Business name</span>
+              <input type="text" name="company" placeholder="Endura Roofing">
+            </label>
+            <label class="field wide">
+              <span>What do you want the site to do?</span>
+              <textarea name="message" rows="4" placeholder="e.g., Generate inquiries, show gallery, book inspections…"></textarea>
+            </label>
+          </div>
+          <div class="cta-row">
+            <button type="submit" class="btn btn-primary btn-lg">Send Request</button>
+            <button type="button" class="btn btn-outline btn-lg" id="copyPreview">Copy message</button>
+          </div>
+          <p class="muted small">Submits via your email client. You can also copy the message and send it manually.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <!-- shows your PNG; falls back to inline SVG above if missing -->
+        <img class="brand-logo" src="assets/logo.png" alt="Elevate Growth logo"
+             onerror="this.replaceWith(document.getElementById('logo-fallback').content.cloneNode(true))">
+        <span>Elevate Growth Sites™</span>
+      </div>
+      <nav class="footer-nav">
+        <a href="#work">Inspiration</a>
+        <a href="#offer">Program</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="legal small">© <span id="year"></span> Elevate Growth. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <div id="lightbox" class="lightbox" hidden>
+    <button class="lightbox-close" aria-label="Close preview">×</button>
+    <img id="lightbox-img" alt="Inspiration preview" />
+    <div id="lightbox-ph" class="img-ph" hidden aria-label="Preview placeholder" role="img"></div>
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
+</body>
+</html>
