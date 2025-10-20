@@ -343,3 +343,8 @@ body.no-scroll { overflow: hidden; } /* also used by your mobile menu */
 @media (max-width: 640px){
   .demo-panel { height: calc(100vh - 2rem); }
 }
+/* Use a 16:9 frame for the Inspiration cards */
+.gallery .shot img{
+  aspect-ratio: 16 / 9;
+  object-fit: cover;     /* fills the card with minimal crop for 16:9 images */
+}

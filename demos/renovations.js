@@ -143,43 +143,70 @@ selected = [
 ];
 renderCombo();
 
-/* ---------- Projects: 2‑up carousel with arrows ---------- */
+/* ---------- Projects: 2‑up carousel with arrows (exact one-card step) ---------- */
 const track   = document.getElementById('rvTrack');
 const prevBtn = document.querySelector('.rv-prev');
 const nextBtn = document.querySelector('.rv-next');
 
 function cardStep(){
-  const first = track?.querySelector('.rv-card');
-  if(!first) return 0;
-  const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "16");
+  if (!track) return 0;
+  const cards = track.querySelectorAll('.rv-card');
+  if (cards.length >= 2) {
+    // exact column-to-column distance = width + gap
+    return cards[1].offsetLeft - cards[0].offsetLeft;
+  }
+  const first = cards[0];
+  if (!first) return 0;
+  const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0') || 0;
   return first.getBoundingClientRect().width + gap;
 }
-function maxIndex(){
-  const total = track.children.length;
-  // 2 visible on desktop, 1 on mobile (CSS switches); compute from current layout
+
+function visibleCount(){
+  if (!track) return 1;
   const first = track.querySelector('.rv-card');
-  if(!first) return 0;
-  const visible = Math.round(track.clientWidth / first.getBoundingClientRect().width) || 1;
-  return Math.max(0, total - visible);
+  if (!first) return 1;
+  const w = first.getBoundingClientRect().width;
+  return Math.max(1, Math.round(track.clientWidth / Math.max(1, w)));
 }
+
+function maxIndex(){
+  const total = track ? track.children.length : 0;
+  return Math.max(0, total - visibleCount());
+}
+
+function currentIndex(){
+  const step = cardStep();
+  if (step <= 0) return 0;
+  return Math.round(track.scrollLeft / step);
+}
+
+function goToIndex(i){
+  const step = cardStep();
+  const target = Math.min(Math.max(i, 0), maxIndex()) * step;
+  track.scrollTo({ left: Math.round(target), behavior: 'smooth' });
+}
+
 function updateArrows(){
-  const idx = Math.round(track.scrollLeft / Math.max(1, cardStep()));
+  const idx = currentIndex();
   prevBtn.disabled = idx <= 0;
   nextBtn.disabled = idx >= maxIndex();
 }
 
 function scrollByCards(dir){
-  const step = cardStep();
-  const target = track.scrollLeft + dir * step;
-  track.scrollTo({left: target, behavior:'smooth'});
-  // small async to reflect new state
-  setTimeout(updateArrows, 200);
+  goToIndex(currentIndex() + dir);     // absolute index → no cumulative drift
+  setTimeout(updateArrows, 250);       // reflect state after smooth scroll
 }
 
-prevBtn?.addEventListener('click', ()=> scrollByCards(-1));
-nextBtn?.addEventListener('click', ()=> scrollByCards(1));
-track?.addEventListener('scroll', updateArrows, {passive:true});
-window.addEventListener('resize', updateArrows);
+prevBtn?.addEventListener('click', () => scrollByCards(-1));
+nextBtn?.addEventListener('click', () => scrollByCards(1));
+track?.addEventListener('scroll', updateArrows, { passive: true });
+
+window.addEventListener('resize', () => {
+  // Re-snap to the nearest card after responsive changes
+  goToIndex(currentIndex());
+  updateArrows();
+});
+
 updateArrows();
 
 /* ---------- Contact form (mailto) ---------- */
@@ -230,3 +257,30 @@ ${(data.get("notes")||"")}
     setTimeout(()=> rvCopy.textContent = "Copy details", 1500);
   }).catch(()=> alert("Copy failed — select and copy manually."));
 });
+/* === Hero collage parallax (Renovations only) === */
+(function(){
+  const collage = document.querySelector('.rn-collage');
+  if(!collage) return;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  let raf = 0;
+  function set(dx, dy){
+    collage.style.setProperty('--dx', dx.toFixed(2) + 'px');
+    collage.style.setProperty('--dy', dy.toFixed(2) + 'px');
+  }
+
+  collage.addEventListener('mousemove', (e)=>{
+    const r = collage.getBoundingClientRect();
+    const nx = (e.clientX - r.left)/r.width - 0.5;
+    const ny = (e.clientY - r.top)/r.height - 0.5;
+    const dx = nx * 20;  // max translate in px
+    const dy = ny * 18;
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(()=> set(dx, dy));
+  });
+  collage.addEventListener('mouseleave', ()=>{
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(()=> set(0, 0));
+  });
+})();

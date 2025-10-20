@@ -188,3 +188,567 @@ body.rv-body{
   .rv-card, .rv-swatch, .rv-btn { transition: transform .2s ease, box-shadow .25s ease }
   .rv-card:hover{ transform:translateY(-2px) }
 }
+/* =========================
+   Renovations — New HERO
+   ========================= */
+.rn-wrap{ width:min(100% - 2rem, 1120px); margin-inline:auto; }
+
+.rn-hero{
+  position:relative;
+  padding: clamp(28px, 6vw, 72px) 0;
+  background:
+    radial-gradient(800px 320px at 6% -10%, rgba(17,24,39,.06), transparent 60%),
+    radial-gradient(700px 260px at 96% 0%, rgba(0,0,0,.05), transparent 60%);
+}
+
+.rn-hero-grid{
+  display:grid; align-items:center; gap:clamp(18px, 3vw, 30px);
+  grid-template-columns: 1.05fr .95fr;
+}
+
+.rn-eyebrow{
+  display:inline-block; font-weight:700; letter-spacing:.12em; font-size:.78rem;
+  text-transform:uppercase; opacity:.7; margin-bottom:.35rem;
+}
+
+.rn-title{
+  font-size:clamp(2rem, 1.6rem + 2vw, 3rem);
+  line-height:1.12; margin:.1rem 0 .6rem;
+}
+
+.rn-glow{
+  position:relative;
+  background: linear-gradient(90deg, #111, #000);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.rn-glow::after{
+  content:""; position:absolute; inset:-6px -8px;
+  background: radial-gradient(200px 60px at 20% 80%, rgba(255,193,7,.20), transparent 60%),
+              radial-gradient(200px 60px at 80% 20%, rgba(59,130,246,.18), transparent 60%);
+  filter: blur(18px); z-index:-1; pointer-events:none;
+}
+
+.rn-sub{ color:#475569; max-width:48ch; margin:0 0 1rem; }
+.rn-cta-row{ display:flex; gap:.6rem; flex-wrap:wrap; margin:.6rem 0 1rem; }
+
+.rn-stats{
+  display:flex; flex-wrap:wrap; gap:.5rem .6rem; padding:0; margin:.4rem 0 0; list-style:none;
+}
+.rn-stats li{
+  border:1px solid #e5e7eb; background:#fff;
+  color:#111827; border-radius:999px; padding:.35rem .65rem; font-weight:600;
+}
+
+/* Visual stack */
+.rn-hero-visual{ min-height: 360px; }
+.rn-stack{
+  position:relative; height: clamp(320px, 50vw, 560px);
+}
+
+.rn-card{
+  position:absolute; display:flex; flex-direction:column; overflow:hidden;
+  background:#fff; border:1px solid #e5e7eb; border-radius:16px;
+  box-shadow: 0 12px 32px rgba(2,8,23,.10), 0 2px 8px rgba(2,8,23,.06);
+  transform-origin:center;
+}
+.rn-card img{
+  display:block; width:100%; height:100%; object-fit:cover;
+}
+.rn-card figcaption{
+  padding:.55rem .8rem; border-top:1px solid #e5e7eb; font-size:.9rem; color:#334155; background:#f9fafb;
+}
+
+/* Sizes / positions */
+.rn-card-lg{ width:min(75%, 560px); aspect-ratio: 4 / 3; left:12%; top:10%; transform:rotate(-1deg); }
+.rn-card-sm{ width:min(36%, 280px); aspect-ratio: 4 / 3; }
+.rn-pos-a{ left:-2%; top:-6%; transform:rotate(-6deg); }
+.rn-pos-b{ right:-6%; bottom:-6%; transform:rotate(6deg); }
+
+/* Subtle float animations (reduced‑motion respected) */
+@media (prefers-reduced-motion:no-preference){
+  .rn-float-a{ animation:rn-float 7s ease-in-out infinite; }
+  .rn-float-b{ animation:rn-float 6.2s ease-in-out infinite .2s; }
+  .rn-float-c{ animation:rn-float 7.4s ease-in-out infinite .4s; }
+  .rn-card:hover{ transform: translateY(-4px) scale(1.01); }
+}
+@keyframes rn-float{
+  0%,100%{ transform:translateY(0) rotate(var(--r, 0deg)); }
+  50%{ transform:translateY(-8px) rotate(var(--r, 0deg)); }
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .rn-hero-grid{ grid-template-columns:1fr; }
+  .rn-hero-visual{ order:2; }
+  .rn-card-lg{ left:6%; top:10%; width:80%; }
+  .rn-pos-a{ left:-4%; top:-8%; }
+  .rn-pos-b{ right:-4%; bottom:-8%; }
+}
+@media (max-width: 520px){
+  .rn-stats{ gap:.45rem; }
+  .rn-stats li{ font-weight:600; font-size:.875rem }
+  .rn-card-lg{ width:86%; left:7%; }
+  .rn-card-sm{ width:48%; }
+}
+/* === HERO — tighter stack + subtle wow-glow === */
+
+/* keep existing .hero and .hero-inner; just fine-tune spacing */
+.hero-inner{
+  /* was: grid-template-columns: 1.2fr .8fr; gap:2rem */
+  grid-template-columns: 1.15fr .85fr;
+  gap: 1.6rem;
+}
+
+/* amplify the main card's premium feel */
+.preview{
+  background: linear-gradient(180deg,#0e1629,#0b1220);
+  border: 1px solid #223045;           /* a touch richer than #1f2937 */
+  border-radius: 18px;
+  box-shadow:
+    0 30px 80px rgba(2,12,24,.45),
+    0 8px 24px rgba(2,12,24,.35);
+  position: relative;
+  overflow: hidden;
+}
+
+/* bring the small card CLOSER so it feels intentional */
+.preview.small{
+  /* was: right:-1rem; bottom:-1rem; width:58%; transform:rotate(-2deg) */
+  right: -0.35rem;
+  bottom: -0.35rem;
+  width: 56%;
+  transform: rotate(-1.5deg);
+}
+
+/* tasteful glow halo behind the stack */
+.hero-art{ position: relative; }
+.hero-art::before{
+  content: "";
+  position: absolute;
+  inset: -14% -8% -16% -8%;
+  background:
+    radial-gradient(600px 300px at 20% 20%, rgba(56,188,246,.27), transparent 55%),
+    radial-gradient(400px 220px at 88% 78%, rgba(2,103,181,.25), transparent 60%);
+  filter: blur(30px);
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-art > .preview{ position: relative; z-index: 1; }
+
+/* quick “shine” pass on hover (subtle) */
+.preview::after{
+  content:"";
+  position:absolute; top:0; bottom:0; width:80px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.20), transparent);
+  transform: translateX(-120%);
+  transition: transform .9s cubic-bezier(.2,.7,.2,1);
+  pointer-events: none;
+}
+.preview:hover::after{ transform: translateX(140%); }
+
+/* slightly brighter internal glow for depth */
+.preview::before{
+  content:"";
+  position:absolute; inset:0; border-radius:18px; pointer-events:none;
+  background: radial-gradient(1200px 500px at -20% -20%, rgba(122,214,255,.18), transparent 40%);
+  mix-blend-mode: screen; opacity: .75;
+}
+
+/* optional grid shimmer in the background */
+.bg-grid::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(90deg, transparent, rgba(56,188,246,.05), transparent);
+  transform: translateX(-100%);
+  animation: gridSweep 6s linear infinite;
+}
+@keyframes gridSweep { to { transform: translateX(100%); } }
+
+/* mobile tuning: keep the overlay tight and intentional */
+@media (max-width: 980px){
+  .hero-inner{ gap: 1.2rem; }
+  .preview.small{
+    right: -0.2rem;
+    bottom: -0.25rem;
+    width: 62%;
+    transform: rotate(-1.2deg);
+  }
+  .hero-art::before{ inset: -18% -10% -12% -10%; filter: blur(24px); }
+}
+@media (max-width: 560px){
+  .preview.small{
+    right: -0.15rem;
+    bottom: -0.2rem;
+    width: 68%;
+  }
+}
+
+/* accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .preview::after,
+  .bg-grid::after { animation: none; transition: none; }
+}
+.preview.small{ right:-0.25rem; bottom:-0.25rem; }
+/* ============================
+   Renovations — HERO (premium)
+   ============================ */
+:root{
+  /* Subtle premium brass + slate palette (scoped to hero only via usage) */
+  --rn-ink:#0b1220;
+  --rn-muted:#5b6576;
+  --rn-line:#e7e9ee;
+  --rn-brass:#CBA65A;        /* satin brass accent */
+  --rn-slate:#0f172a;        /* for glows/shadows */
+  --rn-surface:#ffffff;
+  --rn-radius:18px;
+  --rn-shadow:0 18px 40px rgba(2,8,23,.12), 0 2px 10px rgba(2,8,23,.06);
+  --rn-maxw:1120px;
+}
+
+.rn-hero{position:relative; padding:clamp(28px,6vw,64px) 0 28px; background:transparent;}
+.rn-container{width:min(100% - 2rem, var(--rn-maxw)); margin-inline:auto;}
+
+.rn-hero-grid{
+  display:grid; align-items:center; gap:clamp(16px,3vw,28px);
+  grid-template-columns: 1.05fr .95fr;
+}
+@media (max-width: 980px){ .rn-hero-grid{ grid-template-columns:1fr; } }
+
+.rn-copy .rn-kicker{
+  display:inline-block; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  font-size:.78rem; color:#7a8598; background:#f3f5f9; border:1px solid var(--rn-line);
+  padding:.35rem .55rem; border-radius:999px; margin-bottom:.7rem;
+}
+.rn-h1{margin:.2rem 0 .6rem; font-size:clamp(1.9rem,1.4rem + 2.2vw,3rem); line-height:1.12; color:var(--rn-ink)}
+.rn-underline{box-shadow:inset 0 -.42em rgba(203,166,90,.25)}
+.rn-lead{color:var(--rn-muted); max-width:46ch}
+
+.rn-cta{display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 1.1rem}
+.rn-btn{
+  appearance:none; border:1px solid var(--rn-line); background:#fff; color:var(--rn-ink);
+  padding:.8rem 1rem; border-radius:12px; font-weight:700; text-decoration:none;
+  box-shadow:0 1px 0 rgba(2,8,23,.04); transition:transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.rn-btn:hover{ transform:translateY(-1px); box-shadow:var(--rn-shadow); border-color:#d6dae2 }
+.rn-btn-primary{ background:linear-gradient(180deg, #f7e9c8, var(--rn-brass)); border-color:#d9c18a; color:#2a1d06 }
+.rn-btn-ghost{ background:transparent }
+
+.rn-stats{
+  display:flex; gap:1rem; padding:0; margin:0; list-style:none; flex-wrap:wrap;
+}
+.rn-stats li{
+  display:flex; flex-direction:column; gap:.1rem;
+  background:#fff; border:1px solid var(--rn-line); border-radius:12px; padding:.6rem .75rem;
+  box-shadow:var(--rn-shadow);
+}
+.rn-stats strong{font-size:1.05rem; color:var(--rn-ink)}
+.rn-stats span{font-size:.82rem; color:#7a8598}
+
+/* --- Collage --- */
+.rn-collage{
+  position:relative; display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+  min-height: clamp(340px, 36vw, 560px);
+}
+.rn-card{
+  position:relative; background:var(--rn-surface);
+  border:1px solid var(--rn-line); border-radius:var(--rn-radius); overflow:hidden;
+  box-shadow:var(--rn-shadow); transform: translateZ(0);
+}
+.rn-card img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  aspect-ratio: 16/11; /* keeps frames consistent across assets */
+}
+
+/* Layout: big anchor on right, two tiles left */
+.rn-main{ grid-area: 1 / 2 / 3 / 3; }
+.rn-tile{ aspect-ratio: 4/3; }
+.rn-t1{ grid-area: 1 / 1 / 2 / 2; transform:translateY(8%); }
+.rn-t2{ grid-area: 2 / 1 / 3 / 2; transform:translateY(-8%); }
+
+@media (max-width: 980px){
+  .rn-collage{
+    grid-template-columns:1fr 1fr; grid-template-rows: auto auto;
+    min-height: auto;
+  }
+  .rn-main img{ aspect-ratio: 16/10; }
+  .rn-t1, .rn-t2{ transform:none; }
+}
+
+/* Soft brass glow behind tiles */
+.rn-glow{
+  position:absolute; inset:-14% -8% -12% -14%; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(500px 300px at 20% 25%, rgba(203,166,90,.22), transparent 60%),
+    radial-gradient(560px 340px at 90% 60%, rgba(15,23,42,.22), transparent 60%);
+  filter:saturate(110%);
+}
+
+/* Subtle hover depth (respect reduced motion) */
+@media (prefers-reduced-motion: no-preference){
+  .rn-card{ transition: transform .25s ease, box-shadow .25s ease }
+  .rn-card:hover{ transform: translateY(-3px) }
+}
+
+/* Optional pointer-based parallax (powered by tiny JS below) */
+.rn-collage{ --dx:0px; --dy:0px; }
+@media (prefers-reduced-motion: no-preference){
+  .rn-main{ transform: translate3d(calc(var(--dx) * .35), calc(var(--dy) * .35), 0); }
+  .rn-t1{   transform: translate3d(calc(var(--dx) * .8),  calc(var(--dy) * .8),  0); }
+  .rn-t2{   transform: translate3d(calc(var(--dx) * .6),  calc(var(--dy) * .6),  0); }
+}
+/* === Warm brand palette === */
+:root{
+  --primary: #E48A16;  /* golden‑orange base */
+  --accent:  #FFD188;  /* lighter warm for gradient top */
+}
+* Soft, feathered background behind the hero images (no hard lines) */
+.bg-grid{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  /* warm golden + neutral grey orbs */
+  background:
+    radial-gradient(700px 320px at 12% 22%, rgba(244,167,33,.16),  transparent 60%),
+    radial-gradient(820px 420px at 88% 8%,  rgba(255,209,136,.12), transparent 60%),
+    radial-gradient(1000px 520px at 50% 100%, rgba(148,163,184,.10), transparent 70%);
+
+  /* feather the edges so nothing looks “cut” or banded */
+  -webkit-mask-image: radial-gradient(90% 70% at 50% 30%, #000 40%, transparent 100%);
+          mask-image: radial-gradient(90% 70% at 50% 30%, #000 40%, transparent 100%);
+}
+/* =========================================================
+   Renovations Demo — final overrides (hero bg + gold buttons)
+   ========================================================= */
+
+/* 1) Flip the brand colors to golden‑orange.
+   These override your theme variables that .btn-primary already uses. */
+:root{
+  --primary: #B87300;   /* deep golden orange */
+  --accent:  #FFC14D;   /* warm gold */
+}
+
+/* 2) Buttons — keep your same structure/shine, just recolored */
+.btn-primary{
+  background: linear-gradient(180deg, var(--accent), var(--primary));
+  color:#1a1305;                /* readable on gold */
+  border:0;
+}
+.btn-primary:hover{ filter:brightness(1.03); transform:translateY(-1px); }
+.btn-primary:active{ transform:none; }
+
+/* Optional: Outline buttons to match the new palette (if you use them) */
+.btn-outline{
+  border-color: rgba(255,193,77,.55);
+  color:#FFD074;
+}
+.btn-outline:hover{
+  border-color: rgba(255,193,77,.8);
+  color:#FFE3A1;
+}
+
+/* 3) Hero background — soft, blurred radials (no harsh lines)
+   Attach the glow behind your hero imagery. This does NOT change layout. */
+.hero, .hero-art{ position:relative; }
+.hero-art::before, .hero::before{
+  content:"";
+  position:absolute;
+  inset:-14% -10%;
+  z-index:-1;
+  pointer-events:none;
+
+  /* Three overlapping, low‑alpha shapes (gold + slate) + a blur to kill banding */
+  background:
+    radial-gradient(600px 260px at 12% 18%, rgba(255,193,77,.22), transparent 60%),
+    radial-gradient(520px 240px at 88% 16%, rgba(148,163,184,.28), transparent 60%),
+    radial-gradient(740px 300px at 50% 110%, rgba(230,152,0,.14), transparent 60%);
+  filter: blur(34px);
+  transform: translateZ(0); /* Safari banding fix */
+}
+
+/* Slight extra “pop” on the hero preview cards without touching layout */
+.hero-art .card.preview{
+  box-shadow: 0 25px 60px rgba(255,193,77,.15), 0 14px 30px rgba(0,0,0,.35);
+}
+.hero-art .card.preview.small{
+  box-shadow: 0 18px 48px rgba(148,163,184,.18), 0 10px 22px rgba(0,0,0,.35);
+}
+
+/* (No other sections altered.) */
+/* === FIX: unify gold buttons + soften hero background === */
+
+/* 1) Gold/orange palette used everywhere */
+:root{
+  --gold-1: #F8B319;   /* top stop */
+  --gold-2: #C97400;   /* bottom stop */
+}
+
+/* Main site buttons */
+.btn-primary{
+  background: linear-gradient(180deg, var(--gold-1), var(--gold-2)) !important;
+  color:#0b1220;
+}
+/* Roofing + Landscaping demo buttons */
+.rx-btn-primary,
+.lx-btn-primary{
+  background: linear-gradient(180deg, var(--gold-1), var(--gold-2)) !important;
+  color:#0b1220;
+}
+/* Keep the sheen neutral (not blue) */
+.btn-primary::after,
+.rx-btn-primary::after,
+.lx-btn-primary::after{
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent) !important;
+}
+
+/* 2) Soft hero wash (no hard cutoff) */
+.ren-hero, /* use if your renovations hero wrapper is .ren-hero */
+.hero{
+  position: relative;
+  background: none !important;   /* neutralize any previous hard gradient */
+  overflow: hidden;
+}
+.hero::before,
+.ren-hero::before{
+  content:"";
+  position:absolute; inset:-15% -8% -20% -8%;
+  pointer-events:none; z-index:0;
+  /* layered glows with long fades */
+  background:
+    radial-gradient(600px 300px at 12% 18%, rgba(255,200,60,.22), transparent 60%),
+    radial-gradient(520px 260px at 84% 0%,  rgba(255,160,40,.18), transparent 62%),
+    radial-gradient(420px 240px at 48% 96%, rgba(148,163,184,.12), transparent 70%);
+  filter: blur(28px);
+  /* gentle feather so edges never look “cut” */
+  -webkit-mask-image: radial-gradient(70% 70% at 50% 45%, #000 60%, transparent 100%);
+          mask-image: radial-gradient(70% 70% at 50% 45%, #000 60%, transparent 100%);
+}
+.hero > *, .ren-hero > *{ position:relative; z-index:1; }
+/* === Renovations — fixes (place at END of demos/renovations.css) === */
+
+/* 1) Primary buttons: force a gold-on-gold gradient everywhere on this demo */
+:root{
+  --gold-500: #F6C44A;   /* main gold */
+  --gold-600: #D9A72B;   /* slightly deeper gold */
+  --ink-900: #111827;    /* dark text for contrast */
+}
+
+/* Catch the primary CTA in header, hero, and any other primary buttons */
+.btn.btn-primary,
+.btn-primary,
+.nav .btn-primary,
+header .btn-primary,
+.hero .btn-primary{
+  background: linear-gradient(180deg, var(--gold-500), var(--gold-600)) !important;
+  border: 0 !important;
+  color: var(--ink-900) !important;
+}
+.btn-primary::after{
+  /* keep the subtle shine effect, but on gold */
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent) !important;
+}
+
+/* 2) Hero glow: remove the rectangular layer and add soft radial fades */
+.hero, .reno-hero, .rn-hero{
+  position: relative;
+  overflow: hidden;       /* keeps the glow tidy inside the section */
+  background: #ffffff;    /* base stays white */
+}
+
+/* If an older rectangle overlay exists, kill it so no hard edge shows */
+.hero::before, .reno-hero::before, .rn-hero::before{
+  content: none !important;
+}
+
+/* New soft, edge‑less glow that naturally fades to transparent */
+.hero::after, .reno-hero::after, .rn-hero::after{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(600px 260px at 74% 34%, rgba(246,196,74,.32), rgba(246,196,74,0) 72%),
+    radial-gradient(820px 340px at 86% 70%, rgba(246,196,74,.20), rgba(246,196,74,0) 70%);
+  /* teeny bit of smoothing to avoid banding */
+  filter: saturate(110%);
+}
+/* === Renovations: make primary buttons gold (no blue) === */
+:root{
+  --gold-top:   #F6D58B;  /* lighter top */
+  --gold-bottom:#E0AD37;  /* deeper bottom */
+  --gold-ink:   #0b1220;  /* dark label for contrast */
+}
+
+.btn.btn-primary,
+.nav .btn.btn-primary,
+.nav-cta.btn-primary{
+  background: linear-gradient(180deg, var(--gold-top) 0%, var(--gold-bottom) 100%) !important;
+  color: var(--gold-ink) !important;
+  border: 0;
+}
+
+/* keep the white shimmer; ensure no color cast */
+.btn.btn-primary::after{
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+}
+/* === Renovations: make primary buttons gold (no blue) === */
+:root{
+  --rv-gold-top:    #FFD188;  /* light gold */
+  --rv-gold-bottom: #E48A16;  /* deeper gold */
+  --rv-gold-ink:    #0f172a;  /* dark label text */
+}
+
+.rv-btn-primary,
+.rv-btn.rv-btn-primary,
+.rv-nav .rv-btn-primary,
+.rv-cta .rv-btn-primary,
+.rv-nav-cta.rv-btn-primary{
+  background: linear-gradient(180deg, var(--rv-gold-top) 0%, var(--rv-gold-bottom) 100%) !important;
+  color: var(--rv-gold-ink) !important;
+  border: 0 !important;
+}
+/* ===== Force unified gold CTAs on Renovations only ===== */
+:root{
+  /* Gold palette */
+  --cta-gold-1: #F7D481; /* top stop */
+  --cta-gold-2: #E7AA3A; /* bottom stop */
+
+  /* Override the theme variables that .btn-primary uses */
+  --accent:  var(--cta-gold-1);
+  --primary: var(--cta-gold-2);
+}
+
+/* Make every primary CTA use the gold gradient (and kill any leftover tints) */
+.btn.btn-primary,
+button.btn-primary,
+a.btn.btn-primary,
+.nav .btn.btn-primary,
+.header .btn-primary {
+  background: linear-gradient(180deg, var(--cta-gold-1), var(--cta-gold-2)) !important;
+  border: 0 !important;
+  color: #111 !important;               /* dark ink for contrast */
+}
+
+/* Remove the sheen overlay if your theme adds one */
+.btn-primary::after { display: none !important; }
+/* === Renovations — force gold buttons everywhere (kills blue top) === */
+:root{
+  /* pick the exact gold you want */
+  --rv-gold-top:    #F7D481;   /* light gold */
+  --rv-gold-bottom: #E7AA3A;   /* deeper gold */
+  --rv-gold-ink:    #0f172a;   /* dark text */
+}
+
+/* Nav CTA + any primary button in this demo */
+.rv-btn-primary,
+.rv-nav-cta.rv-btn-primary,
+.rn-btn-primary{
+  background: linear-gradient(180deg, var(--rv-gold-top), var(--rv-gold-bottom)) !important;
+  color: var(--rv-gold-ink) !important;
+  border: 0 !important;
+}
+
+/* if your theme adds a sheen, keep it neutral (no blue) or remove it */
+.rv-btn-primary::after,
+.rn-btn-primary::after{ 
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent) !important;
+  /* or: display:none !important;  */
+}
