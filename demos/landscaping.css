@@ -257,3 +257,7 @@ img{max-width:100%; display:block}
   transform: translateY(-1px);
   box-shadow: var(--shadow);
 }
+/* Center the hero subtext block */
+.lx-hero .lx-sub{
+  margin-inline: auto; /* centers the 60ch-wide block */
+}

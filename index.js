@@ -61,31 +61,49 @@ lightbox?.addEventListener("click", (e) => {
   if(e.target === lightbox) lightbox.hidden = true;
 });
 
-/* Form submit => open mailto draft */
-form?.addEventListener("submit", (e) => {
+/* Form submit => POST to API (fallback to mailto) */
+form?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const data = new FormData(form);
-  const name = (data.get("name") || "").toString().trim();
-  const email = (data.get("email") || "").toString().trim();
-  const phone = (data.get("phone") || "").toString().trim();
-  const company = (data.get("company") || "").toString().trim();
-  const message = (data.get("message") || "").toString().trim();
+  const payload = {
+    name:    (data.get("name") || "").toString().trim(),
+    email:   (data.get("email") || "").toString().trim(),
+    phone:   (data.get("phone") || "").toString().trim(),
+    company: (data.get("company") || "").toString().trim(),
+    message: (data.get("message") || "").toString().trim(),
+  };
 
-  if(!name || !email){
+  if (!payload.name || !payload.email) {
     alert("Please add your name and email so we can reply.");
     return;
   }
-  const subject = encodeURIComponent(`Website quote — ${company || name}`);
-  const body = encodeURIComponent(
-`Name: ${name}
-Email: ${email}
-Phone: ${phone}
-Business: ${company}
-Project: ${message}
+
+  const setStatus = (t) => { document.getElementById("formStatus")?.textContent = t; };
+  setStatus("Sending…");
+
+  try {
+    const r = await fetch("/api/send-estimate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if (!r.ok) throw new Error("send_failed");
+    form.reset();
+    setStatus("Thanks — request sent! We’ll be in touch shortly.");
+  } catch {
+    // Fallback: keep your old mailto path
+    const subject = encodeURIComponent(`Website quote — ${payload.company || payload.name}`);
+    const body = encodeURIComponent(
+`Name: ${payload.name}
+Email: ${payload.email}
+Phone: ${payload.phone}
+Business: ${payload.company}
+Project: ${payload.message}
 
 Sent from Elevate Growth Sites.`.trim());
-
-  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    setStatus("Opening your mail app… If nothing opens, email us at " + CONTACT_EMAIL);
+  }
 });
 
 /* Copy message helper */
