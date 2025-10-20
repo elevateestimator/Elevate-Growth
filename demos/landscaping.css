@@ -203,3 +203,57 @@ img{max-width:100%; display:block}
   .lx-btn, .lx-tile img { transition: transform .2s ease, box-shadow .25s ease }
   .lx-btn:hover{ transform:translateY(-2px) }
 }
+/* Hero secondary CTA: make "See Our Work" solid white for contrast */
+.lx-hero .lx-btn-ghost{
+  background:#fff;
+  color:#0b1220;              /* dark ink on white */
+  border-color: var(--line);
+}
+.lx-hero .lx-btn-ghost:hover{ box-shadow: var(--shadow); }
+/* Before/After — lock stage height and reveal L→R cleanly */
+.lx-ba{
+  position:relative;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  aspect-ratio: 16 / 10;              /* prevents super‑tall stage */
+}
+
+/* Both images occupy the same fixed stage */
+.lx-ba img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:left center;        /* makes L→R feel natural */
+}
+
+/* Only AFTER is clipped from the right based on --pos (0–100) */
+.lx-ba .lx-ba-after{
+  clip-path: inset(0 calc(100% - var(--pos,52%)) 0 0);
+}
+
+/* Keep your slider visible and centered */
+.lx-ba-range{
+  position:absolute; left:0; right:0; bottom:12px;
+  width:60%; margin:auto; accent-color: var(--accent);
+}
+
+/* Optional: on smaller phones, use a slightly taller ratio */
+@media (max-width: 620px){
+  .lx-ba{ aspect-ratio: 4 / 3; }
+}
+/* Make ghost buttons solid white in hero + sticky mobile CTA */
+.lx-hero .lx-btn-ghost,
+.lx-sticky-cta .lx-btn-ghost{
+  background:#fff;
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.lx-hero .lx-btn-ghost:hover,
+.lx-sticky-cta .lx-btn-ghost:hover{
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}

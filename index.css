@@ -134,7 +134,7 @@ img{max-width:100%; display:block}
 
 /* Offer */
 .offer{padding:2.4rem 0}
-.offer-card{display:grid; grid-template-columns: 1.2fr .8fr; gap:1.4rem; background:linear-gradient(180deg,#0d1424,#0b1220); border:1px solid #1f2937; border-radius:18px; padding:1.6rem; box-shadow:var(--shadow)}
+.offer-card{display:grid; grid-template-columns: 1.2fr .8fr; gap:1.4rem; background:linear-gradient(180deg,#0d1424,#0b1220); border:1f solid #1f2937; border-radius:18px; padding:1.6rem; box-shadow:var(--shadow)}
 .checklist{margin:1rem 0; padding-left:1.1rem}
 .checklist li{margin:.2rem 0}
 
@@ -176,7 +176,7 @@ input:focus, textarea:focus{border-color:#345a8a; box-shadow:0 0 0 3px rgba(56,1
 .lightbox-close{position:absolute; top:1rem; right:1rem; font-size:1.8rem; line-height:1; background:#0b1526; color:#cde3f5; border:1px solid #243246; border-radius:10px; padding:.25rem .6rem; cursor:pointer}
 .lightbox-caption{margin-top:.6rem; color:#cbd8e6; text-align:center}
 
-/* Placeholder block for missing assets */
+/* Placeholder for missing assets */
 .img-ph{
   width:min(1100px, 90vw);
   aspect-ratio: 16 / 10;
@@ -222,11 +222,9 @@ input:focus, textarea:focus{border-color:#345a8a; box-shadow:0 0 0 3px rgba(56,1
 }
 /* === Mobile header & footer optimization === */
 :root { --header-h: 64px; }
-
-/* Ensure header has a consistent height */
 .header-inner { min-height: var(--header-h); }
 
-/* Hamburger (hidden on desktop) */
+/* Hamburger */
 .menu-toggle {
   display:none; position:relative; width:42px; height:42px;
   border:1px solid #314156; border-radius:10px; background:#0b1526; cursor:pointer;
@@ -245,10 +243,7 @@ input:focus, textarea:focus{border-color:#345a8a; box-shadow:0 0 0 3px rgba(56,1
 /* Mobile nav panel */
 @media (max-width: 980px){
   .menu-toggle{ display:inline-flex; align-items:center; justify-content:center; }
-  /* hide desktop nav */
   .nav { display:none; }
-
-  /* mobile panel styles (when open) */
   .nav.open {
     display:flex; flex-direction:column; gap:.25rem;
     position:fixed; top:var(--header-h); left:0; right:0;
@@ -259,35 +254,92 @@ input:focus, textarea:focus{border-color:#345a8a; box-shadow:0 0 0 3px rgba(56,1
     z-index:49;
   }
   .nav.open .nav-link,
-  .nav.open .btn {
-    width:100%; text-align:left; padding:.9rem 1rem; border-radius:12px;
-  }
+  .nav.open .btn { width:100%; text-align:left; padding:.9rem 1rem; border-radius:12px; }
   .nav.open .nav-link:hover { background:#111827; }
   .nav.open .nav-cta { text-align:center; }
-
-  /* Optional: tighter brand on very small phones */
-  @media (max-width: 420px){
-    .brand-text{ display:none; }
-  }
-
-  /* Prevent background scroll when menu is open */
   body.no-scroll { overflow:hidden; }
 }
 
 /* Footer stacking on mobile */
 @media (max-width: 700px){
-  .footer-inner{
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    gap:.7rem;
-  }
-  .footer-nav{
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:.7rem 1rem;
-  }
-  .footer-brand{
-    justify-content:center;
-  }
+  .footer-inner{flex-direction:column; align-items:center; text-align:center; gap:.7rem}
+  .footer-nav{flex-wrap:wrap; justify-content:center; gap:.7rem 1rem}
+  .footer-brand{justify-content:center}
+}
+
+/* ===== Demo modal (iframe) ===== */
+body.no-scroll { overflow: hidden; } /* also used by your mobile menu */
+
+.demo-modal{
+  position:fixed; inset:0; z-index:90;
+  display:grid; place-items:center;
+  background:rgba(0,0,0,.72); padding:1rem;
+}
+.demo-panel{
+  width:min(95vw, 1200px);
+  max-height:min(92vh, 860px);
+  background:linear-gradient(180deg,#0d1424,#0b1220);
+  border:1px solid #1f2937;
+  border-radius:18px; box-shadow:var(--shadow);
+  display:flex; flex-direction:column; overflow:hidden;
+}
+.demo-head{
+  display:flex; align-items:center; justify-content:space-between; gap:.8rem;
+  padding:.7rem .9rem; border-bottom:1px solid #1f2937; background:#0b1526;
+}
+.demo-actions{display:flex; gap:.5rem; align-items:center}
+.demo-close{
+  background:#0b1526; color:#cde3f5; border:1px solid #243246; border-radius:10px;
+  width:38px; height:34px; line-height:1; font-size:1.4rem; cursor:pointer;
+}
+.demo-frame-wrap{position:relative; flex:1; background:#0f172a}
+#demoFrame{
+  position:absolute; inset:0; width:100%; height:100%;
+  border:0; background:#0f172a;
+}
+/* Loading spinner until iframe loads */
+.demo-loading{
+  position:absolute; inset:0; display:grid; place-items:center; pointer-events:none;
+}
+.demo-loading::after{
+  content:""; width:38px; height:38px; border-radius:50%;
+  border:3px solid rgba(205,227,245,.25); border-top-color:#7ad6ff;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{ to { transform:rotate(360deg); } }
+/* Mobile */
+@media (max-width: 640px){
+  .demo-panel{ width:96vw; max-height:calc(100vh - 2rem); }
+  .demo-head{ padding:.55rem .7rem }
+  .demo-close{ width:36px; height:32px; font-size:1.3rem }
+}
+/* Make missing-image placeholder behave like the real card image */
+.shot .img-ph{
+  width:100%;
+  aspect-ratio:16 / 10;   /* same height as .shot img */
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+}
+/* Make missing-image placeholder behave like the real card image */
+.shot .img-ph{
+  width:100%;
+  aspect-ratio:16 / 10;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+}
+/* Ensure the demo modal truly hides when [hidden] is present */
+.demo-modal[hidden] { display: none !important; }
+/* Ensure the demo modal truly hides when [hidden] is present */
+.demo-modal[hidden] { display: none !important; }
+
+/* Give the panel actual vertical space so the iframe can fill it */
+.demo-panel {
+  height: clamp(420px, 85vh, 860px);  /* pick a sensible range; replace clamp with min(...) if you prefer */
+}
+
+/* On very small phones, use full viewport (minus padding) */
+@media (max-width: 640px){
+  .demo-panel { height: calc(100vh - 2rem); }
 }

@@ -1,173 +1,125 @@
-/* =========================================================
-   Renovations — Modern Refined (interactions)
-   ========================================================= */
-const RV_EMAIL = "hello@elevategrowth.co"; // TODO: set your email
+/* Renova – interactions focused on the Projects carousel (2-up), lightbox, and form */
+const RV_EMAIL = "hello@elevategrowth.co"; // set your real inbox
 
-// Year
-const rvYear = document.getElementById("rvYear");
-if (rvYear) rvYear.textContent = new Date().getFullYear();
-
-/* Smooth scrolling for in-page links */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener("click", e => {
-    const id = a.getAttribute("href").slice(1);
+/* Smooth scroll for same-page anchors */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href').slice(1);
     const t = document.getElementById(id);
     if(!t) return;
     e.preventDefault();
-    t.scrollIntoView({behavior:"smooth", block:"start"});
+    t.scrollIntoView({behavior:'smooth', block:'start'});
   });
 });
 
-/* Mobile menu overlay */
+/* Mobile menu */
 const rvMenu = document.querySelector('.rv-menu');
-const rvNav  = document.getElementById('rvNav');
-function closeMenu(){ rvMenu?.setAttribute('aria-expanded','false'); rvNav?.classList.remove('open'); document.body.classList.remove('rv-no-scroll'); }
-function openMenu(){  rvMenu?.setAttribute('aria-expanded','true');  rvNav?.classList.add('open');    document.body.classList.add('rv-no-scroll'); }
-rvMenu?.addEventListener('click', ()=>{
+const rvNav  = document.querySelector('.rv-nav');
+function rvCloseMenu(){ rvMenu?.setAttribute('aria-expanded','false'); rvNav?.classList.remove('open'); document.body.classList.remove('rv-no-scroll'); }
+function rvOpenMenu(){  rvMenu?.setAttribute('aria-expanded','true');  rvNav?.classList.add('open');    document.body.classList.add('rv-no-scroll'); }
+rvMenu?.addEventListener('click', ()=> {
   const open = rvMenu.getAttribute('aria-expanded') === 'true';
-  open ? closeMenu() : openMenu();
+  open ? rvCloseMenu() : rvOpenMenu();
 });
-rvNav?.querySelectorAll('a').forEach(a=> a.addEventListener('click', closeMenu));
-window.addEventListener('keydown', e => { if(e.key === 'Escape') closeMenu(); });
+rvNav?.querySelectorAll('a').forEach(a=> a.addEventListener('click', rvCloseMenu));
+window.addEventListener('keydown', e => { if(e.key === 'Escape') rvCloseMenu(); });
 
-/* Image fallbacks (clean placeholder if missing) */
-function rvAttachFallbacks(scope=document){
-  scope.querySelectorAll("img.rv-asset").forEach(img => {
-    img.addEventListener("error", () => {
-      const ph = document.createElement("div");
-      ph.className = "rv-ph-inline";
-      ph.setAttribute("role","img");
-      ph.setAttribute("aria-label", img.alt || "Preview");
-      img.replaceWith(ph);
-    }, {once:true});
+/* ===== 2‑up Projects carousel (scrollLeft paging) ===== */
+(function initCarousel(){
+  const carousels = document.querySelectorAll('.rv-carousel');
+  carousels.forEach(carousel=>{
+    const viewport = carousel.querySelector('.rv-viewport');
+    const prev = carousel.querySelector('.rv-prev');
+    const next = carousel.querySelector('.rv-next');
+    if(!viewport || !prev || !next) return;
+
+    const step = () => viewport.clientWidth; // page width == 2 cards (or 1 on mobile)
+
+    function go(dir){
+      viewport.scrollBy({ left: dir * step(), behavior:'smooth' });
+    }
+    function update(){
+      const max = viewport.scrollWidth - viewport.clientWidth - 1;
+      prev.disabled = viewport.scrollLeft <= 1;
+      next.disabled = viewport.scrollLeft >= max;
+    }
+
+    // Buttons
+    prev.addEventListener('click', ()=> go(-1));
+    next.addEventListener('click', ()=> go(1));
+
+    // Keep arrows correct while scrolling / resizing
+    let raf = 0;
+    viewport.addEventListener('scroll', ()=> {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(update);
+    });
+    window.addEventListener('resize', update);
+
+    // Keyboard support when viewport is in view
+    viewport.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight'){ e.preventDefault(); go(1); }
+      if(e.key === 'ArrowLeft'){  e.preventDefault(); go(-1); }
+    });
+    // Start state
+    update();
   });
-}
-rvAttachFallbacks();
+})();
 
-/* Lightbox */
-const lb = document.getElementById("rvLightbox");
-const lbImg = document.getElementById("rvLightboxImg");
-const lbPh  = document.getElementById("rvLightboxPh");
-const lbCap = document.getElementById("rvLightboxCaption");
-document.querySelectorAll(".rv-open").forEach(img => {
-  img.addEventListener("click", () => {
-    const src = img.getAttribute("src");
-    const cap = img.getAttribute("data-caption") || img.getAttribute("alt") || "Preview";
-    lbCap.textContent = cap;
-    lb.hidden = false; document.body.classList.add('rv-no-scroll');
-
-    lbPh.hidden = true; lbImg.hidden = false;
-    lbImg.onload = () => { lbPh.hidden = true; lbImg.hidden = false; };
-    lbImg.onerror = () => { lbImg.hidden = true; lbPh.hidden = false; };
-    lbImg.src = src;
+/* Lightbox for project images */
+const lb = document.getElementById('rvLightbox');
+const lbImg = document.getElementById('rvLightboxImg');
+document.querySelectorAll('.rv-enlarge').forEach(img=>{
+  img.addEventListener('click', ()=>{
+    lb.hidden = false;
+    lbImg.src = img.getAttribute('src');
   });
 });
-document.querySelector(".rv-x")?.addEventListener("click", () => {
-  lb.hidden = true; document.body.classList.remove('rv-no-scroll');
-});
-lb?.addEventListener("click", (e) => { if(e.target === lb){ lb.hidden = true; document.body.classList.remove('rv-no-scroll'); }});
-window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && !lb.hidden){ lb.hidden = true; document.body.classList.remove('rv-no-scroll'); }});
+document.querySelector('.rv-lightbox-close')?.addEventListener('click', ()=> lb.hidden = true);
+lb?.addEventListener('click', e => { if(e.target === lb) lb.hidden = true; });
+window.addEventListener('keydown', e => { if(e.key === 'Escape' && !lb.hidden) lb.hidden = true; });
 
-/* Reel arrows */
-const track = document.querySelector('.rv-track');
-const prev  = document.querySelector('.rv-prev');
-const next  = document.querySelector('.rv-next');
-
-function cardStep(){
-  const card = track?.querySelector('.rv-slide');
-  if(!card) return 320;
-  const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0);
-  return card.getBoundingClientRect().width + gap;
-}
-function updateArrows(){
-  if(!track || !prev || !next) return;
-  const max = track.scrollWidth - track.clientWidth - 2;
-  prev.disabled = track.scrollLeft <= 0;
-  next.disabled = track.scrollLeft >= max;
-}
-prev?.addEventListener('click', ()=> track.scrollBy({left: -cardStep(), behavior:'smooth'}));
-next?.addEventListener('click', ()=> track.scrollBy({left:  cardStep(), behavior:'smooth'}));
-track?.addEventListener('scroll', updateArrows);
-window.addEventListener('resize', updateArrows);
-updateArrows();
-
-/// Drawer (contact)
-const drawer   = document.getElementById('rvDrawer');
-const openBtns = document.querySelectorAll('[data-open-drawer]');
-const closeBtn = drawer?.querySelector('.rv-drawer-close');
-
-function openDrawer(){
-  if(!drawer) return;
-  if (typeof closeMenu === 'function') closeMenu();  // ensure mobile nav is closed
-  drawer.hidden = false;
-  document.body.classList.add('rv-no-scroll');       // also hides sticky CTA via CSS
-}
-
-function closeDrawer(){
-  if(!drawer) return;
-  drawer.hidden = true;
-  document.body.classList.remove('rv-no-scroll');
-}
-
-openBtns.forEach(btn => btn.addEventListener('click', openDrawer));
-closeBtn?.addEventListener('click', closeDrawer);
-drawer?.addEventListener('click', e => { if(e.target === drawer) closeDrawer(); });
-window.addEventListener('keydown', e => { if(e.key === 'Escape') closeDrawer(); });
-
-/* Form -> mailto */
-const rvForm = document.getElementById("rvForm");
-const rvCopy = document.getElementById("rvCopy");
-
-rvForm?.addEventListener("submit", (e) => {
+/* Simple form -> mailto */
+const rvForm = document.getElementById('rvForm');
+const rvCopy = document.getElementById('rvCopy');
+rvForm?.addEventListener('submit', (e)=>{
   e.preventDefault();
   const data = new FormData(rvForm);
-  const name = (data.get("name") || "").toString().trim();
-  const email = (data.get("email") || "").toString().trim();
-  const phone = (data.get("phone") || "").toString().trim();
-  const address = (data.get("address") || "").toString().trim();
-  const notes = (data.get("notes") || "").toString().trim();
-
-  if(!name || !email){
-    alert("Please add your name and email so we can reply.");
-    return;
-  }
-  const subject = encodeURIComponent(`Renovations — start project: ${name}`);
+  const name = (data.get('name')||'').toString().trim();
+  const email = (data.get('email')||'').toString().trim();
+  const phone = (data.get('phone')||'').toString().trim();
+  const notes = (data.get('notes')||'').toString().trim();
+  if(!name || !email){ alert('Please add your name and email.'); return; }
+  const subject = encodeURIComponent(`Renovation quote — ${name}`);
   const body = encodeURIComponent(
 `Name: ${name}
 Email: ${email}
 Phone: ${phone}
-Address: ${address}
 
 Notes:
 ${notes}
 
-— Sent from Renova Studio demo.`.trim());
-
+— Sent from Renova demo.`.trim());
   window.location.href = `mailto:${RV_EMAIL}?subject=${subject}&body=${body}`;
 });
-
-/* Copy details */
-rvCopy?.addEventListener("click", () => {
+rvCopy?.addEventListener('click', ()=>{
   const data = new FormData(rvForm);
-  const name = (data.get("name") || "").toString().trim();
-  const email = (data.get("email") || "").toString().trim();
-  const phone = (data.get("phone") || "").toString().trim();
-  const address = (data.get("address") || "").toString().trim();
-  const notes = (data.get("notes") || "").toString().trim();
-
+  const name = (data.get('name')||'').toString().trim();
+  const email = (data.get('email')||'').toString().trim();
+  const phone = (data.get('phone')||'').toString().trim();
+  const notes = (data.get('notes')||'').toString().trim();
   const compiled =
-`Start project — renovations
+`Renovation quote request
 Name: ${name}
 Email: ${email}
 Phone: ${phone}
-Address: ${address}
 
 Notes:
 ${notes}
 
-— Renova Studio demo`;
+— Renova demo`;
   navigator.clipboard?.writeText(compiled).then(()=>{
-    rvCopy.textContent = "Copied ✓";
-    setTimeout(()=> rvCopy.textContent = "Copy details", 1500);
-  }).catch(()=> alert("Copy failed — select & copy manually."));
+    rvCopy.textContent = 'Copied ✓';
+    setTimeout(()=> rvCopy.textContent = 'Copy details', 1400);
+  });
 });

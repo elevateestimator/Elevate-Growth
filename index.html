@@ -8,8 +8,8 @@
   <meta property="og:title" content="Elevate Growth Sites™ — Websites that look unreal, load instantly, and convert" />
   <meta property="og:description" content="Done‑for‑you websites engineered for speed, clarity, and trust." />
   <meta property="og:type" content="website" />
-  <link rel="stylesheet" href="index.css" />
-  <script defer src="index.js"></script>
+  <link rel="stylesheet" href="index.css?v=10" />
+<script defer src="index.js?v=10"></script>
 </head>
 <body>
   <!--
@@ -174,7 +174,7 @@
                 <h3>Landscaper — Visual & Bold</h3>
                 <p>Big imagery, before/after sections, short copy.</p>
               </div>
-              <button class="btn btn-sm btn-outline open-lightbox" data-image="assets/mock2.png">Open</button>
+              <button class="btn btn-sm btn-outline open-demo" data-src="demos/landscaping.html">Open</button>
             </figcaption>
           </figure>
 
@@ -185,7 +185,7 @@
                 <h3>Renovations — Premium & Trust‑Led</h3>
                 <p>Case studies, testimonials, guarantees, FAQs.</p>
               </div>
-              <button class="btn btn-sm btn-outline open-lightbox" data-image="assets/mock3.png">Open</button>
+              <button class="btn btn-sm btn-outline open-demo" data-src="demos/renovations.html">Open</button>
             </figcaption>
           </figure>
         </div>
@@ -326,6 +326,24 @@
     <img id="lightbox-img" alt="Inspiration preview" />
     <div id="lightbox-ph" class="img-ph" hidden aria-label="Preview placeholder" role="img"></div>
     <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
+
+  <!-- DEMO MODAL (iframe) -->
+  <div id="demoModal" class="demo-modal" hidden>
+    <div class="demo-panel" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
+      <header class="demo-head">
+        <h3 id="demoTitle" class="h3">Demo</h3>
+        <div class="demo-actions">
+          <a id="demoNewTab" class="btn btn-sm btn-outline" target="_blank" rel="noopener">Open in new tab</a>
+          <button class="btn btn-sm demo-close" aria-label="Close">×</button>
+        </div>
+      </header>
+
+      <div class="demo-frame-wrap">
+        <div class="demo-loading" id="demoLoading" aria-hidden="true"></div>
+        <iframe id="demoFrame" title="Demo preview" loading="eager" referrerpolicy="no-referrer"></iframe>
+      </div>
+    </div>
   </div>
 </body>
 </html>

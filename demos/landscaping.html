@@ -25,6 +25,7 @@
         <a class="lx-nav-link" href="#services">Services</a>
         <a class="lx-nav-link" href="#showcase">Showcase</a>
         <a class="lx-nav-link" href="#beforeafter">Before/After</a>
+        <a class="lx-nav-link" href="#projects">Projects</a>
         <a class="lx-nav-link" href="#process">Process</a>
         <a class="lx-nav-link" href="#faq">FAQ</a>
         <a class="lx-btn lx-btn-primary lx-nav-cta" href="#contact">Request Quote</a>
@@ -36,7 +37,9 @@
     <!-- HERO -->
     <section class="lx-hero">
       <div class="lx-hero-media">
-        <img class="lx-asset" src="../assets/landscaping/hero.jpg" alt="Modern landscape design with stone and greens" loading="lazy">
+        <!-- Your hero -->
+        <img class="lx-asset" src="landscapingassets/mainhero.webp"
+             alt="Modern landscape hero — hardscape and native greens" loading="lazy">
       </div>
       <div class="lx-hero-overlay">
         <div class="lx-container">
@@ -50,7 +53,7 @@
       </div>
     </section>
 
-    <!-- SERVICE CHIPS (scrollable) -->
+    <!-- SERVICE CHIPS -->
     <section class="lx-section lx-chips" id="services">
       <div class="lx-container">
         <div class="lx-chips-row" role="list">
@@ -72,7 +75,8 @@
       <div class="lx-container">
         <article class="lx-media">
           <div class="lx-media-img">
-            <img class="lx-asset" src="../assets/landscaping/stripe1.jpg" alt="Stone path with lighting">
+            <!-- Stone & Lighting -->
+            <img class="lx-asset" src="landscapingassets/stonepath.jpeg" alt="Stone pathway with integrated lighting">
           </div>
           <div class="lx-media-copy">
             <span class="lx-kicker">Stone & Lighting</span>
@@ -88,7 +92,8 @@
 
         <article class="lx-media lx-media-rev">
           <div class="lx-media-img">
-            <img class="lx-asset" src="../assets/landscaping/stripe2.jpg" alt="Lawn and native plant beds">
+            <!-- Lawns & Planting -->
+            <img class="lx-asset" src="landscapingassets/lawnedging.avif" alt="Crisp lawn edging and native beds">
           </div>
           <div class="lx-media-copy">
             <span class="lx-kicker">Lawns & Planting</span>
@@ -112,8 +117,9 @@
           <p class="lx-lead">Drag to reveal. We show the details most people hide.</p>
         </header>
         <div class="lx-ba">
-          <img class="lx-asset lx-ba-before" src="../assets/landscaping/before.jpg" alt="Before landscaping">
-          <img class="lx-asset lx-ba-after"  src="../assets/landscaping/after.jpg"  alt="After landscaping">
+          <!-- Left→right reveal (CSS already clips from the right). -->
+          <img class="lx-asset lx-ba-before" src="landscapingassets/landscapebefore.jpg" alt="Before landscaping">
+          <img class="lx-asset lx-ba-after"  src="landscapingassets/landscapeafter.jpg"  alt="After landscaping">
           <input type="range" class="lx-ba-range" min="0" max="100" value="52" aria-label="Reveal after">
         </div>
       </div>
@@ -125,20 +131,60 @@
         <header class="lx-section-head">
           <h2 class="lx-h2">Projects</h2>
         </header>
+
+        <!-- You can have more than 8; the grid flows naturally. -->
         <div class="lx-mosaic">
-          <figure class="lx-tile lx-span2"><img class="lx-asset lx-open" src="../assets/landscaping/p1.jpg" alt="Courtyard in stone" data-caption="Courtyard in stone"></figure>
-          <figure class="lx-tile"><img class="lx-asset lx-open" src="../assets/landscaping/p2.jpg" alt="Front entry planting" data-caption="Front entry planting"></figure>
-          <figure class="lx-tile"><img class="lx-asset lx-open" src="../assets/landscaping/p3.jpg" alt="Lawn & edging" data-caption="Lawn & edging"></figure>
-          <figure class="lx-tile lx-tall"><img class="lx-asset lx-open" src="../assets/landscaping/p4.jpg" alt="Night lighting" data-caption="Night lighting"></figure>
-          <figure class="lx-tile"><img class="lx-asset lx-open" src="../assets/landscaping/p5.jpg" alt="Garden beds" data-caption="Garden beds"></figure>
-          <figure class="lx-tile"><img class="lx-asset lx-open" src="../assets/landscaping/p6.jpg" alt="Retaining wall" data-caption="Retaining wall"></figure>
-          <figure class="lx-tile lx-span2"><img class="lx-asset lx-open" src="../assets/landscaping/p7.jpg" alt="Patio with seating" data-caption="Patio with seating"></figure>
-          <figure class="lx-tile"><img class="lx-asset lx-open" src="../assets/landscaping/p8.jpg" alt="Native planting" data-caption="Native planting"></figure>
+          <!-- Large highlights -->
+          <figure class="lx-tile lx-span2">
+            <img class="lx-asset lx-open" src="landscapingassets/courtyard.jpg"
+                 alt="Courtyard — stone & greens" data-caption="Courtyard — stone & greens">
+          </figure>
+          <figure class="lx-tile lx-span2">
+            <img class="lx-asset lx-open" src="landscapingassets/patioseating.webp"
+                 alt="Patio with seating" data-caption="Patio with seating">
+          </figure>
+
+          <!-- Standard tiles -->
+          <figure class="lx-tile">
+            <img class="lx-asset lx-open" src="landscapingassets/frontentryplanting.webp"
+                 alt="Front entry planting" data-caption="Front entry planting">
+          </figure>
+          <figure class="lx-tile">
+            <img class="lx-asset lx-open" src="landscapingassets/gardenbed.jpg"
+                 alt="Garden bed" data-caption="Garden bed">
+          </figure>
+          <figure class="lx-tile">
+            <img class="lx-asset lx-open" src="landscapingassets/lawn.jpeg"
+                 alt="New lawn" data-caption="New lawn">
+          </figure>
+          <figure class="lx-tile">
+            <img class="lx-asset lx-open" src="landscapingassets/lawnedging.avif"
+                 alt="Lawn edging" data-caption="Lawn edging">
+          </figure>
+
+          <!-- Tall tile variant -->
+          <figure class="lx-tile lx-tall">
+            <img class="lx-asset lx-open" src="landscapingassets/retainingwall.webp"
+                 alt="Retaining wall" data-caption="Retaining wall">
+          </figure>
+
+          <figure class="lx-tile">
+            <img class="lx-asset lx-open" src="landscapingassets/nativeplants.jpeg"
+                 alt="Native plants" data-caption="Native plants">
+          </figure>
+          <figure class="lx-tile">
+            <img class="lx-asset lx-open" src="landscapingassets/nightlighting.jpg"
+                 alt="Night lighting" data-caption="Night lighting">
+          </figure>
+          <figure class="lx-tile">
+            <img class="lx-asset lx-open" src="landscapingassets/stonepath.jpeg"
+                 alt="Stone path" data-caption="Stone path">
+          </figure>
         </div>
       </div>
     </section>
 
-    <!-- PROCESS (vertical stepper) -->
+    <!-- PROCESS -->
     <section class="lx-section" id="process">
       <div class="lx-container">
         <header class="lx-section-head">
