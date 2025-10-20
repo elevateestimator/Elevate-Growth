@@ -3,152 +3,150 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Renova — Renovation Inspiration</title>
+  <title>Renova — Renovations</title>
   <meta name="robots" content="noindex,nofollow" />
-  <link rel="stylesheet" href="renovations.css">
+  <link rel="stylesheet" href="renovations.css" />
   <script defer src="renovations.js"></script>
 </head>
-<body class="rv-body" id="top">
+<body class="rv-body">
   <!-- Header -->
-  <header class="rv-header">
+  <header class="rv-header" id="top">
     <div class="rv-container rv-header-inner">
-      <a class="rv-brand" href="#top" aria-label="Renova">
-        <span class="rv-dot" aria-hidden="true"></span>
-        <strong>Renova</strong>
+      <a class="rv-brand" href="#top" aria-label="Renova — home">
+        <span class="rv-brand-dot"></span><span>Renova</span>
       </a>
-      <nav class="rv-nav" aria-label="Primary">
-        <a href="#palette" class="rv-nav-link">Palette</a>
-        <a href="#projects" class="rv-nav-link">Projects</a>
-        <a href="#contact" class="rv-nav-link">Contact</a>
-        <a href="#contact" class="rv-btn rv-btn-primary rv-nav-cta">Request Quote</a>
-      </nav>
+
       <button class="rv-menu" aria-expanded="false" aria-controls="rvNav" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
+
+      <nav id="rvNav" class="rv-nav" aria-label="Primary">
+        <a class="rv-nav-link" href="#palette">Palette</a>
+        <a class="rv-nav-link" href="#projects">Projects</a>
+        <a class="rv-nav-link" href="#contact">Contact</a>
+        <a class="rv-btn rv-btn-primary rv-nav-cta" href="#contact">Request Quote</a>
+      </nav>
     </div>
   </header>
 
   <main>
-    <!-- Hero (small box, as before) -->
+    <!-- Hero -->
     <section class="rv-hero">
       <div class="rv-container rv-hero-inner">
         <div class="rv-hero-copy">
-          <h1 class="rv-h1">Premium home renovations, built to last.</h1>
-          <p class="rv-sub">Clean lines, durable finishes, and trustworthy workmanship.</p>
+          <h1 class="rv-h1">Premium renovations, <span class="rv-underline">tight details</span>, trusted finish.</h1>
+          <p class="rv-sub">Design‑led builds with clean millwork, durable finishes, and a tidy jobsite. We obsess the details so your home looks intentional.</p>
           <div class="rv-cta-row">
-            <a class="rv-btn rv-btn-primary" href="#projects">See projects</a>
-            <a class="rv-btn" href="#contact">Get a quote</a>
+            <a class="rv-btn rv-btn-primary rv-btn-lg" href="#contact">Get a quote</a>
+            <a class="rv-btn rv-btn-ghost rv-btn-lg" href="#projects">See projects</a>
           </div>
         </div>
+
+        <!-- small hero card on the right -->
         <figure class="rv-hero-media">
-          <img class="rv-asset" src="renovationassets/renovationhero.png" alt="Renovation hero preview">
-          <figcaption>Kitchen • Millwork • Bath</figcaption>
+          <img class="rv-asset" src="renovationassets/renovationhero.png" alt="Renovation preview" loading="lazy">
+          <figcaption>Modern finishes • intentional lines</figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- Palette chips -->
-    <section class="rv-section" id="palette">
+    <!-- PALETTE (new creative display) -->
+    <section class="rv-section rv-palette" id="palette">
       <div class="rv-container">
-        <h2 class="rv-h2">Palette</h2>
-        <ul class="rv-chips">
-          <li class="rv-chip"><span class="rv-swatch" style="--c:#f5f6f7"></span>Soft White</li>
-          <li class="rv-chip"><span class="rv-swatch" style="--c:#1c1c1c"></span>Matte Black</li>
-          <li class="rv-chip"><span class="rv-swatch" style="--c:#b9935a"></span>Satin Brass</li>
-          <li class="rv-chip"><span class="rv-swatch" style="--c:#5a4636"></span>Walnut Veneer</li>
-          <li class="rv-chip"><span class="rv-swatch" style="--c:#d7c9b8"></span>European Oak</li>
-          <li class="rv-chip"><span class="rv-swatch" style="--c:#6d6f73"></span>Graphite Stone</li>
-        </ul>
+        <header class="rv-section-head">
+          <h2 class="rv-h2">Palette Studio</h2>
+          <p class="rv-lead">Tap materials to build a combo. Scene tints to your selection — clean, visual, quick.</p>
+        </header>
+
+        <div class="rv-pal-layout">
+          <figure class="rv-pal-scene">
+            <img id="palScene" class="rv-asset" src="renovationassets/openkitchen.avif" alt="Palette scene preview" loading="eager">
+            <figcaption id="palCaption">Open Concept Kitchen — Soft White • European Oak • Satin Brass</figcaption>
+          </figure>
+
+          <aside class="rv-pal-panel">
+            <div class="rv-combo-bar">
+              <strong>Combo:</strong>
+              <div id="palCombo" class="rv-combo-chips" aria-live="polite"></div>
+              <div class="rv-combo-actions">
+                <button id="palShuffle" class="rv-link">Try a combo</button>
+                <button id="palClear" class="rv-link">Clear</button>
+              </div>
+            </div>
+
+            <!-- Floating swatch cloud -->
+            <div class="rv-swatches" aria-label="Material palette">
+              <!-- image materials -->
+              <button class="rv-swatch" data-type="image" data-name="European Oak" data-img="renovationassets/europeanoak.jpg">
+                <img src="renovationassets/europeanoak.jpg" alt="European Oak"><span>Oak</span>
+              </button>
+              <button class="rv-swatch" data-type="image" data-name="Walnut Veneer" data-img="renovationassets/walnutveneer.jpg">
+                <img src="renovationassets/walnutveneer.jpg" alt="Walnut Veneer"><span>Walnut</span>
+              </button>
+              <button class="rv-swatch" data-type="image" data-name="Graphite Stone" data-img="renovationassets/graphitestone.webp">
+                <img src="renovationassets/graphitestone.webp" alt="Graphite Stone"><span>Stone</span>
+              </button>
+              <button class="rv-swatch" data-type="image" data-name="Porcelain Tile" data-img="renovationassets/porcelintile.jpg">
+                <img src="renovationassets/porcelintile.jpg" alt="Porcelain Tile"><span>Tile</span>
+              </button>
+              <button class="rv-swatch" data-type="image" data-name="Textured Paint" data-img="renovationassets/texturedpaint.jpg">
+                <img src="renovationassets/texturedpaint.jpg" alt="Textured Paint"><span>Texture</span>
+              </button>
+              <!-- color accents -->
+              <button class="rv-swatch rv-color" data-type="color" data-name="Soft White" data-color="#F5F2E9"><span>Soft&nbsp;White</span></button>
+              <button class="rv-swatch rv-color" data-type="color" data-name="Matte Black" data-color="#121212"><span>Matte&nbsp;Black</span></button>
+              <button class="rv-swatch rv-color" data-type="color" data-name="Satin Brass" data-color="#B99A5C"><span>Brass</span></button>
+            </div>
+
+            <p class="rv-hint">Select up to three. We’ll tint the scene to match and pin your choices above.</p>
+          </aside>
+        </div>
       </div>
     </section>
 
-    <!-- Projects — 2-up carousel -->
+    <!-- PROJECTS (palette chips removed from cards) -->
     <section class="rv-section" id="projects">
       <div class="rv-container">
-        <div class="rv-section-head">
+        <header class="rv-section-head">
           <h2 class="rv-h2">Projects</h2>
-        </div>
+        </header>
 
-        <div class="rv-carousel" data-visible="2">
-          <button class="rv-arrow rv-prev" aria-label="Previous slide">‹</button>
+        <div class="rv-carousel">
+          <button class="rv-arrow rv-prev" aria-label="Previous">‹</button>
 
-          <div class="rv-viewport" id="rvViewport">
-            <div class="rv-track">
-              <!-- Each card -->
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/openkitchen.avif" alt="Open Concept Kitchen">
-                <figcaption>Open Concept Kitchen</figcaption>
-              </figure>
+          <div class="rv-track" id="rvTrack">
+            <figure class="rv-card">
+              <img class="rv-asset" src="renovationassets/openkitchen.avif" alt="Open Concept Kitchen" loading="lazy">
+              <figcaption>Open Concept Kitchen</figcaption>
+            </figure>
 
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/livingroommillwork.jpg" alt="Living Room Millwork">
-                <figcaption>Living Room Millwork</figcaption>
-              </figure>
+            <figure class="rv-card">
+              <img class="rv-asset" src="renovationassets/livingroommillwork.jpg" alt="Living Room Millwork" loading="lazy">
+              <figcaption>Living Room Millwork</figcaption>
+            </figure>
 
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/minimalbathroom.webp" alt="Minimal Bathroom">
-                <figcaption>Minimal Bathroom</figcaption>
-              </figure>
+            <figure class="rv-card">
+              <img class="rv-asset" src="renovationassets/minimalbathroom.webp" alt="Minimal Bathroom" loading="lazy">
+              <figcaption>Minimal Bathroom</figcaption>
+            </figure>
 
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/mudroom.jpg" alt="Mudroom Entry">
-                <figcaption>Mudroom Entry</figcaption>
-              </figure>
+            <figure class="rv-card">
+              <img class="rv-asset" src="renovationassets/mudroom.jpg" alt="Mudroom Built‑ins" loading="lazy">
+              <figcaption>Mudroom Built‑ins</figcaption>
+            </figure>
 
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/bedroomfeaturewall.webp" alt="Bedroom Feature Wall">
-                <figcaption>Bedroom Feature Wall</figcaption>
-              </figure>
+            <figure class="rv-card">
+              <img class="rv-asset" src="renovationassets/bedroomfeaturewall.webp" alt="Bedroom Feature Wall" loading="lazy">
+              <figcaption>Bedroom Feature Wall</figcaption>
+            </figure>
 
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/porcelintile.jpg" alt="Porcelain Tile Shower">
-                <figcaption>Porcelain Tile Shower</figcaption>
-              </figure>
-
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/europeanoak.jpg" alt="European Oak Floors">
-                <figcaption>European Oak Floors</figcaption>
-              </figure>
-
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/graphitestone.webp" alt="Graphite Stone Tops">
-                <figcaption>Graphite Stone Tops</figcaption>
-              </figure>
-
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/matteblack.jpg" alt="Matte Black Fixtures">
-                <figcaption>Matte Black Fixtures</figcaption>
-              </figure>
-
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/softwhite.webp" alt="Soft White Cabinetry">
-                <figcaption>Soft White Cabinetry</figcaption>
-              </figure>
-
-              <!-- Extras you mentioned -->
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/satinbrass.jpg" alt="Satin Brass Hardware">
-                <figcaption>Satin Brass Hardware</figcaption>
-              </figure>
-
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/stairandrailing.webp" alt="Stairs & Railing">
-                <figcaption>Stairs &amp; Railing</figcaption>
-              </figure>
-
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/texturedpaint.jpg" alt="Textured Paint">
-                <figcaption>Textured Paint</figcaption>
-              </figure>
-
-              <figure class="rv-card">
-                <img class="rv-img rv-enlarge" src="renovationassets/walnutveneer.jpg" alt="Walnut Veneer">
-                <figcaption>Walnut Veneer</figcaption>
-              </figure>
-            </div>
+            <figure class="rv-card">
+              <img class="rv-asset" src="renovationassets/stairandrailing.webp" alt="Stair & Railing" loading="lazy">
+              <figcaption>Stair &amp; Railing</figcaption>
+            </figure>
           </div>
 
-          <button class="rv-arrow rv-next" aria-label="Next slide">›</button>
+          <button class="rv-arrow rv-next" aria-label="Next">›</button>
         </div>
       </div>
     </section>
@@ -158,29 +156,37 @@
       <div class="rv-container rv-contact">
         <header>
           <h2 class="rv-h2">Request a quote</h2>
-          <p class="rv-muted">Tell us about the space and finishes you have in mind.</p>
+          <p class="rv-lead">Tell us about your project and timeline. We’ll reply with a simple, no‑pressure plan.</p>
         </header>
+
         <form id="rvForm" class="rv-form" novalidate>
           <div class="rv-grid rv-form-grid">
-            <label class="rv-field"><span>Full name</span><input name="name" required></label>
-            <label class="rv-field"><span>Email</span><input type="email" name="email" required></label>
-            <label class="rv-field"><span>Phone</span><input name="phone"></label>
-            <label class="rv-field rv-wide"><span>Notes</span><textarea name="notes" rows="3" placeholder="Rooms, timing, budget range…"></textarea></label>
+            <label class="rv-field"><span>Full name</span><input name="name" placeholder="Jane Homeowner" required></label>
+            <label class="rv-field"><span>Email</span><input type="email" name="email" placeholder="you@email.com" required></label>
+            <label class="rv-field"><span>Phone</span><input name="phone" placeholder="(555) 555‑5555"></label>
+            <label class="rv-field rv-wide"><span>Address</span><input name="address" placeholder="123 Main St, City"></label>
+            <label class="rv-field rv-wide"><span>Notes</span><textarea name="notes" rows="3" placeholder="Rooms, finishes, timing…"></textarea></label>
           </div>
           <div class="rv-cta-row">
-            <button class="rv-btn rv-btn-primary" type="submit">Send Request</button>
-            <button class="rv-btn" type="button" id="rvCopy">Copy details</button>
+            <button type="submit" class="rv-btn rv-btn-primary rv-btn-lg">Send Request</button>
+            <button type="button" class="rv-btn rv-btn-ghost rv-btn-lg" id="rvCopy">Copy details</button>
           </div>
-          <p class="rv-small rv-muted">Sends via your email client.</p>
+          <p class="rv-muted rv-small">This demo opens your email client to send.</p>
         </form>
       </div>
     </section>
   </main>
 
-  <!-- Lightbox (unchanged behavior for enlarging project images) -->
-  <div id="rvLightbox" class="rv-lightbox" hidden>
-    <button class="rv-lightbox-close" aria-label="Close">×</button>
-    <img id="rvLightboxImg" alt="Project preview" />
-  </div>
+  <footer class="rv-footer">
+    <div class="rv-container rv-footer-inner">
+      <div class="rv-muted rv-small">Demo layout for inspiration</div>
+      <nav class="rv-foot-nav">
+        <a href="#palette">Palette</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="rv-muted rv-small">© <span id="rvYear"></span> Renova</div>
+    </div>
+  </footer>
 </body>
 </html>
